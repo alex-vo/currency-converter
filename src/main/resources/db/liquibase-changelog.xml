@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Aleksej" id="1">
+        <createTable tableName="currency_rate">
+            <column name="currency_from" type="varchar(3)"/>
+            <column name="currency_to" type="varchar(3)"/>
+            <column name="rate" type="decimal(2)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
