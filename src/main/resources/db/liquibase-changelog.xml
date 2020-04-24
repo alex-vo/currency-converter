@@ -5,7 +5,9 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet author="Aleksej" id="1">
+        <createSequence sequenceName="currency_rate_seq" />
         <createTable tableName="currency_rate">
+            <column name="id" type="bigint"/>
             <column name="currency_from" type="varchar(3)"/>
             <column name="currency_to" type="varchar(3)"/>
             <column name="rate" type="decimal(2)"/>

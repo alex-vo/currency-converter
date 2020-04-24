@@ -1,7 +1,7 @@
 spring:
   datasource:
 #    url: jdbc:h2:mem:currency_rate_db;MODE=PostgreSQL
-    url: jdbc:postgresql://localhost:5432/test
+    url: jdbc:postgresql://localhost:5432/currency_rate_db
     username: postgres
     password: postgres
   jpa:
@@ -9,6 +9,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
   liquibase:
-    change-log:
+    change-log: classpath:db/liquibase-changelog.xml

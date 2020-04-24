@@ -11,7 +11,8 @@ import java.math.BigDecimal;
 public class CurrencyRate {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "currency_rate_seq", sequenceName = "currency_rate_seq", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(generator = "currency_rate_seq")
     private Long id;
     @Column(name = "currency_from")
     private String currencyFrom;
