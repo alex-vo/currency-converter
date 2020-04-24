@@ -53,6 +53,7 @@ public class CurrencyRateRepositoryTest {
                 prepareCurrencyRate("USD", "JPY", BigDecimal.valueOf(1)),
                 prepareCurrencyRate("USD", "EUR", BigDecimal.valueOf(0.9)),
                 prepareCurrencyRate("EUR", "JPY", BigDecimal.valueOf(0.9)),
+                prepareCurrencyRate("JPY", "EUR", BigDecimal.valueOf(0.5)),
                 prepareCurrencyRate("EUR", "CHF", BigDecimal.valueOf(0.9)),
                 prepareCurrencyRate("CHF", "JPY", BigDecimal.valueOf(0.9))
         ));
@@ -67,6 +68,20 @@ public class CurrencyRateRepositoryTest {
         Optional<BigDecimal> result = currencyRateRepository.findCurrencyRate("CAD", "AUD");
 
         MatcherAssert.assertThat(result, Matchers.is(Optional.empty()));
+    }
+
+    @Test
+    public void shouldUpdateExistingRate() {
+        CurrencyRate currencyRate = prepareCurrencyRate("USD", "JPY", BigDecimal.valueOf(1));
+        currencyRateRepository.save(currencyRate);
+
+        int updated = currencyRateRepository.updateRate("USD", "JPY", BigDecimal.valueOf(0.5));
+
+        MatcherAssert.assertThat(updated, Matchers.is(1));
+        MatcherAssert.assertThat(
+                currencyRateRepository.findById(currencyRate.getId()).orElseThrow().getRate(),
+                Matchers.is(BigDecimal.valueOf(0.5))
+        );
     }
 
     private CurrencyRate prepareCurrencyRate(String from, String to, BigDecimal rate) {
